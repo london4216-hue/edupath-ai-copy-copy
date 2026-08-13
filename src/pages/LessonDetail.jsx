@@ -14,6 +14,7 @@ import CelebrationOverlay from '@/components/CelebrationOverlay';
 import SensoryBackground from '@/components/SensoryBackground';
 import SensoryButton from '@/components/SensoryButton';
 import MusicToggle from '@/components/MusicToggle';
+import StepVoiceOver from '@/components/StepVoiceOver';
 import useAutoAmbientMusic from '@/hooks/useAutoAmbientMusic';
 import { getDayConfigForAgeAndKey } from '@/lib/lessonConfig';
 import { ArrowLeft, Loader2, Pencil, Sparkles, Home } from 'lucide-react';
@@ -229,6 +230,7 @@ export default function LessonDetail() {
 
           {step === 'drawing' && (
             <div className="space-y-3">
+              <StepVoiceOver text={`It's drawing time, ${kid?.name || 'friend'}! Pick a color and draw a picture about ${dayCfg.subject}. Have fun!`} label="Hear it again" />
               <div className="rounded-2xl bg-white p-4 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <Pencil className="h-5 w-5 text-[#4FAE5A]" />
@@ -256,6 +258,7 @@ export default function LessonDetail() {
 
           {step === 'lunch' && (
             <div className="space-y-3">
+              <StepVoiceOver text={`Yum, lunch time, ${kid?.name || 'friend'}! Tap each food to eat it all up. Sandwich, apple, carrot, milk, banana, and cracker. Let's eat!`} label="Hear it again" />
               <LunchActivity kidName={kid?.name} />
               <div className="flex gap-2">
                 <button
