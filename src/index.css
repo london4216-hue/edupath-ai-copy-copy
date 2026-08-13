@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -90,3 +91,38 @@
     @apply bg-background text-foreground font-body;
   }
 }
+
+/* Studio skin v2 — global */
+:root {
+  --bg: #F7F3FF;
+  --accent: #00A3FF;
+  --card: #FFFFFF;
+  --text: #2B2B2B;
+  --radius: 12px;
+  --elev: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --space: 24px;
+  --micro-ease: cubic-bezier(.22, .9, .3, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.container { max-width: 980px; margin: 0 auto; padding: var(--space); }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--elev); padding: 20px; margin: 16px 0; }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 18px;
+  transition: transform .12s var(--micro-ease), box-shadow .12s var(--micro-ease);
+}
+.btn-primary:active { transform: scale(.98); }
+.player-poster { width: 100%; height: auto; border-radius: 10px; object-fit: cover; display: block; }
+.layer { position: relative; will-change: transform, opacity; }
+.z-top { z-index: 1000; }
