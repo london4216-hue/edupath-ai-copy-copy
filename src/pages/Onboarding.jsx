@@ -107,7 +107,7 @@ export default function Onboarding() {
       if (done && kidId) {
         await base44.entities.Kid.update(kidId, { parent_videos: next });
         setUploading(false);
-        setStep('camera');
+        setStep('consent');
       } else {
         setUploading(false);
         setCurrentParent(currentParent + 1);
@@ -216,18 +216,18 @@ export default function Onboarding() {
     );
   }
 
-  if (step === 'camera') {
+  if (step === 'consent') {
     return (
       <div className="min-h-screen bg-[#FFFDF8] flex flex-col items-center justify-center px-6 py-10">
         <div className="w-full max-w-md text-center">
           <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-[#EDE6FF]">
             <Camera className="h-8 w-8 text-[#7B4FE0]" />
           </div>
-          <h1 className="text-3xl font-bold" style={{ color: '#7B4FE0' }}>Turn on the camera</h1>
+          <h1 className="text-3xl font-bold" style={{ color: '#7B4FE0' }}>Camera & microphone</h1>
           <p className="mt-2 text-black/60 font-medium">
-            Zoodo uses the camera to cheer your child on during activities. Let's allow it now!
+            Zoodo uses the camera and microphone to cheer your child on during activities. Please allow them so the fun can begin!
           </p>
-          <label className="mt-5 flex items-start gap-2 rounded-2xl bg-white/70 p-3 text-left text-sm font-medium text-black/70">
+          <label className="mt-6 flex items-start gap-2 rounded-2xl bg-white/70 p-4 text-left text-sm font-medium text-black/70">
             <input
               type="checkbox"
               checked={camConsent}
@@ -235,10 +235,39 @@ export default function Onboarding() {
               className="mt-0.5 h-5 w-5 shrink-0 accent-[#7B4FE0]"
             />
             <span>
-              I consent to Zoodo using the camera to cheer my child on during activities.
+              I consent to Zoodo using the camera and microphone to cheer my child on during activities.
             </span>
           </label>
-          <div className="relative mx-auto mt-4 aspect-video w-full max-w-sm overflow-hidden rounded-3xl bg-black/10 shadow-inner">
+          <Button
+            onClick={() => setStep('camera')}
+            disabled={!camConsent}
+            className="mt-5 w-full rounded-2xl bg-[#7B4FE0] py-6 text-lg font-bold text-white hover:bg-[#6a3fd0] disabled:opacity-60"
+          >
+            Allow camera & mic
+          </Button>
+          <button
+            onClick={finish}
+            className="mt-3 w-full text-sm font-semibold text-black/40 underline underline-offset-2 hover:text-black/60"
+          >
+            Skip for now — we can do this later
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (step === 'camera') {
+    return (
+      <div className="min-h-screen bg-[#FFFDF8] flex flex-col items-center justify-center px-6 py-10">
+        <div className="w-full max-w-md text-center">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-[#EDE6FF]">
+            <Camera className="h-8 w-8 text-[#7B4FE0]" />
+          </div>
+          <h1 className="text-3xl font-bold" style={{ color: '#7B4FE0' }}>Camera's on!</h1>
+          <p className="mt-2 text-black/60 font-medium">
+            Zoodo can see {name.trim() || 'your child'} now and is ready to cheer them on!
+          </p>
+          <div className="relative mx-auto mt-5 aspect-video w-full max-w-sm overflow-hidden rounded-3xl bg-black/10 shadow-inner">
             {camStatus === 'denied' ? (
               <div className="flex h-full items-center justify-center p-4 text-center text-sm font-semibold text-black/50">
                 Camera is off — that's okay, you can still play! You can enable it later.
@@ -254,19 +283,13 @@ export default function Onboarding() {
           </div>
           <Button
             onClick={startCountdown}
-            disabled={camStatus === 'asking' || countdown > 0 || !camConsent}
+            disabled={camStatus === 'asking' || countdown > 0}
             className="mt-4 w-full rounded-2xl bg-[#7B4FE0] py-6 text-lg font-bold text-white hover:bg-[#6a3fd0] disabled:opacity-60"
           >
             {camStatus === 'asking' ? (
               <span className="flex items-center justify-center gap-2"><Loader2 className="h-5 w-5 animate-spin" /> Asking for permission…</span>
             ) : 'Start the plan'}
           </Button>
-          <button
-            onClick={finish}
-            className="mt-3 w-full text-sm font-semibold text-black/40 underline underline-offset-2 hover:text-black/60"
-          >
-            Skip for now — we can do this later
-          </button>
           {countdown > 0 && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <span className="text-8xl font-bold text-white animate-ping-slow">{countdown}</span>
