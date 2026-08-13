@@ -227,7 +227,18 @@ export default function Onboarding() {
           <p className="mt-2 text-black/60 font-medium">
             Zoodo uses the camera to cheer your child on during activities. Let's allow it now!
           </p>
-          <div className="relative mx-auto mt-6 aspect-video w-full max-w-sm overflow-hidden rounded-3xl bg-black/10 shadow-inner">
+          <label className="mt-5 flex items-start gap-2 rounded-2xl bg-white/70 p-3 text-left text-sm font-medium text-black/70">
+            <input
+              type="checkbox"
+              checked={camConsent}
+              onChange={(e) => setCamConsent(e.target.checked)}
+              className="mt-0.5 h-5 w-5 shrink-0 accent-[#7B4FE0]"
+            />
+            <span>
+              I consent to Zoodo using the camera to cheer my child on during activities.
+            </span>
+          </label>
+          <div className="relative mx-auto mt-4 aspect-video w-full max-w-sm overflow-hidden rounded-3xl bg-black/10 shadow-inner">
             {camStatus === 'denied' ? (
               <div className="flex h-full items-center justify-center p-4 text-center text-sm font-semibold text-black/50">
                 Camera is off — that's okay, you can still play! You can enable it later.
@@ -241,17 +252,6 @@ export default function Onboarding() {
               </span>
             )}
           </div>
-          <label className="mt-5 flex items-start gap-2 rounded-2xl bg-white/70 p-3 text-left text-sm font-medium text-black/70">
-            <input
-              type="checkbox"
-              checked={camConsent}
-              onChange={(e) => setCamConsent(e.target.checked)}
-              className="mt-0.5 h-5 w-5 shrink-0 accent-[#7B4FE0]"
-            />
-            <span>
-              I consent to Zoodo using the camera to cheer my child on during activities.
-            </span>
-          </label>
           <Button
             onClick={startCountdown}
             disabled={camStatus === 'asking' || countdown > 0 || !camConsent}
