@@ -138,8 +138,8 @@ export default function Onboarding() {
   if (step === 'intro') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#FFFDF8] to-[#FDE9F0] flex flex-col items-center justify-center px-6 py-10 text-center">
-        <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 shadow-sm">
-          <Sparkles className="h-6 w-6 text-[#D96969]" />
+        <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EDE6FF] shadow-sm">
+          <Sparkles className="h-6 w-6 text-[#7B4FE0]" />
         </div>
         <KidAvatar greeting="Hi! I'm Zoodo! Let's learn and play together!" audioUrl={introAudio} size={180} />
         <h1 className="mt-6 text-4xl font-bold" style={{ color: '#7B4FE0' }}>
